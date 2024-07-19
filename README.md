@@ -1,5 +1,7 @@
 # React + Vite
 
+### 진행중... 2번 파일 smallSideBar 생성하기 하기
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
