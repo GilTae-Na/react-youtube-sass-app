@@ -6,8 +6,11 @@ import { BiArrowBack } from 'react-icons/bi'
 import { ImSearch } from 'react-icons/im'
 import { MdKeyboardVoice } from 'react-icons/md'
 import { SearchContext } from '../../context/SearchContext'
+import useWindowSize from '../../helpers/useWindowSize'
 
 const NavigationBar  = () => {
+
+  const { width } = useWindowSize();
 
   const {
     showSpecialSearchBar,

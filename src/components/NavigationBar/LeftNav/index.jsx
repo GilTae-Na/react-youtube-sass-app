@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { IoMenu as Menu } from 'react-icons/io5'
 import imgUrl from '../../../assets/logo.png'
 import { SideBarContext } from '../../../context/SideBarContext'
+import { Link } from 'react-router-dom'
 
 const LeftNav  = () => {
     const { handleToggleSideBar } = useContext(SideBarContext)

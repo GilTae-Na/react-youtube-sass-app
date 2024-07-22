@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import useWindowSize from '../../helpers/useWindowSize'
 import SmallSideBar from './SmallSideBar'
 import BigSideBar from './BigSideBar'

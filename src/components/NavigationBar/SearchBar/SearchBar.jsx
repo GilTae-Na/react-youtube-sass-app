@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { ImSearch } from 'react-icons/im'
-import { MdKeyboardVoice } from 'react-icons/md'
+import { ImSearch as SearchIcon } from 'react-icons/im'
+import { MdKeyboardVoice as VoiceIcon } from 'react-icons/md'
 import useWindowSize from '../../../helpers/useWindowSize'
 import { SearchContext } from '../../../context/SearchContext'
 
-const SearchBar = () => {
+const SearchBar = ({ onChange, onSubmit }) => {
 
   const {width} = useWindowSize();
 

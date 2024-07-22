@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from 'react'
-import { getVideoInfo } from '../../helpers/fetchingDAta'
+import React, { useCallback, useEffect, useState } from 'react'
+import { getVideoInfo } from '../../helpers/fetchingData'
+import axios from 'axios'
 
 const MainPage = () => {
 
@@ -8,8 +9,9 @@ const MainPage = () => {
   const getMainVideos = useCallback( async()=>{
     try{
       const response = await axios.get(`/search?part=snippet&maxResults=10&q=beautiful%20place`)
+      console.log(response.data)
       let videoArray = await  response.data.items      
-      //console.log(videoArray)
+      console.log(videoArray)
 
       videoArray = await getVideoInfo(videoArray)
       setMainVideos(videoArray)

@@ -86,13 +86,13 @@ const BigSideBar  = () => {
         </div>
 
         <ReactTooltip
-          effect = 'solid'
+          effect='solid'
           id='sidebar'
           place='bottom'
           backgroundColor='black'
           delayShow={300}
           arrowColor='transparent'
-          offset={{top:0, left: 0}}
+          offset={{ top: 0, left: 0 }}
           className='tooltip'
         />
       </div>
