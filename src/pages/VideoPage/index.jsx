@@ -4,6 +4,7 @@ import YouTube from 'react-youtube';
 import { SideBarContext } from '../../context/SideBarContext';
 import dayjs from 'dayjs';
 import axios from '../../api/axios';
+import RelatedVideos from './RelatedVideos';
 
 dayjs.extend(relativeTime)
 
@@ -173,6 +174,9 @@ const VideoPage = () => {
               {/* {videoCommentsMarkUp} */}
             </div>
           </div>
+        </div>
+        <div className="column column_2">
+          <RelatedVideos currentVideo={videoId} />
         </div>
       </div>
     </section>
