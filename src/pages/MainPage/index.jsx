@@ -1,35 +1,53 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { getVideoInfo } from '../../helpers/fetchingData'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import axios from '../../api/axios'
+import VideoCard from '../../components/VideoCard/VideoCard'
+import { getVideoInfo } from '../../helpers/fetchingData'
+import { SideBarContext } from '../../context/SideBarContext'
 
 const MainPage = () => {
-
-  const [mainVideos, setMainVideos] = useState([])
+  const storedVideos = JSON.parse(localStorage.getItem('mainVideos'))
+  const [mainVideos, setMainVideos] = useState(storedVideos || [])
+  const { setIsToggled } = useContext(SideBarContext)
 
   const getMainVideos = useCallback( async()=>{
     try{
-      const response = await axios.get(`/search?part=snippet&maxResults=10&q=beautiful%20place`)
-      console.log(response.data)
-      let videoArray = await  response.data.items      
-      console.log(videoArray)
-
-      videoArray = await getVideoInfo(videoArray)
-      setMainVideos(videoArray)
-
+      if(!storedVideos){
+        const response = await axios.get(`/search?part=snippet&maxResults=10&q=beautiful%20place`)
+        let videoArray = await  response.data.items
+        videoArray = await getVideoInfo(videoArray)
+        setMainVideos(videoArray)
+        console.log(videoArray)
+        
+        localStorage.setItem('mainVideos', JSON.stringify(videoArray))
+      }
     }catch(e){
       console.log(e)
     }
 
-  }, [])
+  }, [storedVideos])
 
   useEffect(( )=> {
     getMainVideos();
   }, [getMainVideos])
 
+  useEffect(() => {
+    setIsToggled(true);
+  }, [])
+
   return (
-    <div>
-      MainPage
-    </div>
+    <section className='mainGallery'>
+      {mainVideos.map(video => (
+        <VideoCard
+          key={video.id.videoId}
+          id={video.id.videoId}
+          video={video}
+          img={video.snippet.thumbnails.medium.url}
+          info={video.snippet}
+          eInfo={video.extraInfo}
+          channelInfo={video.channelInfo}
+        />
+      ))}
+    </section>
   )
 }
 
