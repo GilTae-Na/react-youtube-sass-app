@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { getVideoInfo } from '../../helpers/fetchingData'
-import axios from 'axios'
+import axios from '../../api/axios'
 
 const MainPage = () => {
 

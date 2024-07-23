@@ -1,14 +1,13 @@
-import axios from "axios"
+import axios from "../api/axios"
 
 export const getVideoInfo = async(videosArr) => {
     try{
 
         for(let video of videosArr){
-            const videoResponse = await axios.get(
-                `/videos?part=snippet&part=contentDetails&part=player&part=statistics&id=${video.id.videoId}`
-            )
-
-            Object.assign(video.snippet, { ...videoResponse.data.items[0].snippet })
+          const videoResponse = await axios.get(
+            `/videos?part=snippet&part=contentDetails&part=player&part=statistics&id=${video.id.videoId}`
+          )
+          Object.assign(video.snippet, { ...videoResponse.data.items[0].snippet })
             video.extraInfo = Object.assign(
                 {},
                 videoResponse.data.items[0].tags,
