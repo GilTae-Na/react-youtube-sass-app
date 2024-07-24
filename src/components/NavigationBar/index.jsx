@@ -37,6 +37,13 @@ const NavigationBar  = () => {
     }
   }
 
+  const handleChange = e =>{
+    setSearchQuery({
+      ...searchQuery,
+      input: e.target.value
+    })
+  }
+
   const specialSearchBarMarkUp = (
     <div className='special_searchbar'>
       <button onClick={()=> {setShowSpecialSearchBar(false)}}>
@@ -47,6 +54,7 @@ const NavigationBar  = () => {
         name = 'search'
         placeholder= 'Search'
         autoComplete = 'false'
+        onChange={handleChange}
         />
 
         <button type="submit">
@@ -66,7 +74,7 @@ const NavigationBar  = () => {
         ? specialSearchBarMarkUp
         :<>
           <LeftNav/>
-          <SearchBar/>
+          <SearchBar onChange={handleChange} onSubmit={handleSubmit}/>
           <RightNav/>
         </>
 

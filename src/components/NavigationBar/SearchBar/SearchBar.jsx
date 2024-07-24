@@ -3,14 +3,25 @@ import { ImSearch as SearchIcon } from 'react-icons/im'
 import { MdKeyboardVoice as VoiceIcon } from 'react-icons/md'
 import useWindowSize from '../../../helpers/useWindowSize'
 import { SearchContext } from '../../../context/SearchContext'
+import { useNavigate } from 'react-router-dom'
 
 const SearchBar = ({ onChange, onSubmit }) => {
 
   const {width} = useWindowSize();
 
   const {
+    searchQuery,
+    setSearchQuery,
     setShowSpecialSearchBar,
   } = useContext(SearchContext)
+
+  const handleChange = e => {
+    setSearchQuery({
+      ...searchQuery,
+      input: e.target.value
+    });
+  }
+
 
   return (
     <div className={`SearchBar ${width <= 640 ? 'smallSearch': ''}`}>
@@ -18,7 +29,7 @@ const SearchBar = ({ onChange, onSubmit }) => {
       width > 640 ? 
       (
         <form onSubmit={onSubmit}>
-          <input type = "text" name = 'search' placeholder='Search' autoComplete='false'/>
+          <input value = {searchQuery.input} onChange={handleChange} type = "text" name = 'search' placeholder='Search' autoComplete='false'/>
           <button type = 'submit'>
             <SearchIcon size={20} data-tip='Search' data-for='navbar'/>
           </button>
