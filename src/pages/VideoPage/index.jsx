@@ -5,6 +5,7 @@ import { SideBarContext } from '../../context/SideBarContext';
 import dayjs from 'dayjs';
 import axios from '../../api/axios';
 import RelatedVideos from './RelatedVideos';
+import relativeTime from 'dayjs/plugin/relativeTime'
 
 dayjs.extend(relativeTime)
 

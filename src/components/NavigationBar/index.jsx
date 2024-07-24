@@ -7,22 +7,42 @@ import { ImSearch } from 'react-icons/im'
 import { MdKeyboardVoice } from 'react-icons/md'
 import { SearchContext } from '../../context/SearchContext'
 import useWindowSize from '../../helpers/useWindowSize'
+import { useNavigate } from 'react-router-dom'
 
 const NavigationBar  = () => {
 
   const { width } = useWindowSize();
 
   const {
+    searchQuery,
+    setSearchQuery,
     showSpecialSearchBar,
     setShowSpecialSearchBar,
   } = useContext(SearchContext)
+
+
+  let navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if(searchQuery.input !== ''){
+      const response = await axios.get(`/search?part=snippet&maxResults=10&q=${searchQuery.input}`)
+
+      setSearchQuery({
+        ...searchQuery,
+        videos: response.data.items
+      })
+
+      navigate(`/result/${searchQuery.input}`)
+    }
+  }
 
   const specialSearchBarMarkUp = (
     <div className='special_searchbar'>
       <button onClick={()=> {setShowSpecialSearchBar(false)}}>
         <BiArrowBack size ={25}/>
       </button>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type = "text"
         name = 'search'
         placeholder= 'Search'
